@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Stack;
+
 
 public class BalancedBrackets {
     /**
@@ -23,13 +25,24 @@ public class BalancedBrackets {
      */
     public static boolean hasBalancedBrackets(String str) {
         int brackets = 0;
+        Stack<Character> stack=new Stack<>();
         for (char ch : str.toCharArray()) {
             if (ch == '[') {
-                brackets++;
+                //brackets++;
+                stack.push(ch);
             } else if (ch == ']') {
-                brackets--;
+                //brackets--;
+                if(stack.isEmpty() || stack.peek()!='[')
+                    return false;
+                else
+                    stack.pop();
+
             }
         }
-        return brackets == 0;
+        if(stack.isEmpty())
+            return true;
+        else
+            return false;
+       // return brackets == 0;
     }
 }
